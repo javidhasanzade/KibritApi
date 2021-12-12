@@ -25,6 +25,7 @@ namespace KibritAPI.Controllers
         }
         
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Insert(CreateBookCommand command)
         {
             await _mediator.Send(command);
@@ -40,6 +41,7 @@ namespace KibritAPI.Controllers
         }
         
         [HttpGet("Genre/{Id}")]
+        [Authorize]
         public async Task<IActionResult> GetByGenre([FromRoute] GetBooksByGenreQuery query)
         {
             
@@ -47,18 +49,21 @@ namespace KibritAPI.Controllers
         }
         
         [HttpGet("Top5Genres/{Type?}")]
+        [Authorize]
         public async Task<IActionResult> GetTop5Genres([FromRoute] GetTop5GenresQuery query)
         {
             return Ok(await _mediator.Send(query));
         }
         
         [HttpGet("Top5Authors/{Type?}")]
+        [Authorize]
         public async Task<IActionResult> GetTop5Authors([FromRoute] GetTop5AuthorsQuery query)
         {
             return Ok(await _mediator.Send(query));
         }
         
         [HttpDelete("{Id}")]
+        [Authorize]
         public async Task<IActionResult> DeleteById([FromRoute] DeleteBookCommand command)
         {
             await _mediator.Send(command);
@@ -66,6 +71,7 @@ namespace KibritAPI.Controllers
         }
         
         [HttpPut]
+        [Authorize]
         public async Task<IActionResult> Update(UpdateBookCommand command)
         {
             await _mediator.Send(command);
